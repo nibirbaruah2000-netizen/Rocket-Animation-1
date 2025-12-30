@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rocket Launch</title>
+  <style>
+    .rocket {
+      font-size: 84px;
+      transform: translateY(20%);
+      opacity: 1;
+      transition: transform 0.25s ease;
+      will-change: transform, opacity;
+      pointer-events: none;
+    }
+    .rocket.launch {
+      animation: lift 1s forwards;
+    }
+    @keyframes lift {
+      0% { transform: translateY(20%) scale(1); opacity: 1; }
+      25% { transform: translateY(0%) scale(1.06); opacity: 1; }
+      60% { transform: translateY(-60%) scale(0.95); opacity: 0.9; }
+      100% { transform: translateY(-160%) scale(0.8); opacity: 0; }
+    }
+    .title {
+      font-size: clamp(20px, 4vw, 36px);
+      color: #0b1220;
+      margin: 0;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 420ms ease, transform 420ms ease;
+    }
+    .title.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="rocket">🚀</div>
+  <h1 class="title">The Amazing Work Ways</h1>
+
+  <script>
+    const rocket = document.querySelector('.rocket');
+    const title = document.querySelector('.title');
+    rocket.classList.add('launch');
+    rocket.addEventListener('animationend', () => {
+      title.classList.add('visible');
+    });
+  </script>
+</body>
+</html>
